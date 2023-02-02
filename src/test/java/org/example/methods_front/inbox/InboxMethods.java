@@ -1,7 +1,6 @@
 package org.example.methods_front.inbox;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.help_methods.BaseMethodsSelenium;
 import org.example.help_methods.WebDriverSettings;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,8 +12,8 @@ import org.openqa.selenium.support.PageFactory;
  */
 @Slf4j
 public class InboxMethods extends WebDriverSettings {
-    public static BaseMethodsSelenium baseMethods;
-    public static InboxMethods inboxMethods;
+
+    public static InboxMethods inboxMethods = new InboxMethods(driver);
 
     public InboxMethods(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -27,6 +26,9 @@ public class InboxMethods extends WebDriverSettings {
     @FindBy(xpath = "//span[contains(text(),'Написать')]/..")
     public static WebElement button_new;
 
+    //a[@aria-describedby="tooltip-0-1"]
+    @FindBy(xpath = "//a[@aria-describedby='tooltip-0-1']")
+    public static WebElement button_new2;
     /**
      * Ссылка на черновики
      */
@@ -37,16 +39,20 @@ public class InboxMethods extends WebDriverSettings {
      * Открытие нового письма
      */
     public static void openNewMail() {
+        try {
+            button_new.click();
+        } catch (Exception e) {
+            button_new2.click();
+        }
 
-        inboxMethods = new InboxMethods(driver);
-        button_new.click();
+
         log.info("Открыли новое письмо");
-
 
     }
 
     public static void goToDrafts() {
-
+        button_drafts.click();
+        log.info(" Перешли в черновики");
     }
 
 }

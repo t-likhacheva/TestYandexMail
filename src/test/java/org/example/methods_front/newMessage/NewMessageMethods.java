@@ -16,8 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 @Slf4j
 public class NewMessageMethods extends WebDriverSettings {
 
-    public static NewMessageMethods newMessageMethods = new NewMessageMethods(driver);;
-
+    public static NewMessageMethods newMessageMethods = new NewMessageMethods(driver);
     public NewMessageMethods(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
@@ -36,12 +35,12 @@ public class NewMessageMethods extends WebDriverSettings {
     /**
      * Поле Тема
      */
-    @FindBy(id = "passp:sign-in")
+    @FindBy(id = "compose-field-subject-4")
     public static WebElement input_theme;
     /**
      * Поле текст письма
      */
-    @FindBy(id = "passp:sign-in")
+    @FindBy(xpath = "//div[@title=\"Напишите что-нибудь\"]")
     public static WebElement input_text;
 
     /**
@@ -54,7 +53,8 @@ public class NewMessageMethods extends WebDriverSettings {
         log.info("ввели тему");
         input_text.sendKeys(message.text);
         log.info("ввели текст");
-
+        baseMethods.waitPage(3000);
+        log.info("немного подождали для автосохранения");
     }
 
     public static void closeMessage() {

@@ -51,8 +51,6 @@ public class LoginGroupMethods extends WebDriverSettings {
      * ввод логина и пароля (через аннотации и переменные класса )
      */
     public static void login() {
-
-
         driver.get(HOMEURL);
         log.info("Открыли стартовую страницу");
         if (button_login == null) {
@@ -76,6 +74,6 @@ public class LoginGroupMethods extends WebDriverSettings {
 
     public static void logout() {
 
-        driver.quit();
+
     }
 }
