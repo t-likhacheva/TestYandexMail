@@ -80,33 +80,6 @@ public class LoginGroupMethods extends WebDriverSettings {
 
     }
 
-    /**
-     * ввод логина и пароля (через методы вебдрайвера)
-     */
-    public static void login1() {
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
-
-        driver.get(HOMEURL);
-        log.info("Открыли стартовую страницу");
-
-        driver.findElement(By.xpath("//span[contains(text(),'Войти в Почту')]/..")).click();
-        System.out.println("Перешли на страницу логина333");
-        WebElement loginField = driver.findElement(By.xpath("//span[contains(text(),'Почта')]/.."));
-        if (loginField.isDisplayed()) {
-            loginField.click();
-            System.out.println("Выбрали почту");
-            driver.findElement(By.id("passp-field-login")).sendKeys(LOGIN);
-            driver.findElement(By.id("passp:sign-in")).click();
-            System.out.println("Ввели логин ");
-        }
-        driver.findElement(By.id("passp-field-passwd")).sendKeys(PASSWORD);
-        driver.findElement(By.id("passp:sign-in")).click();
-        System.out.println("Ввели пароль");
-
-
-    }
 
     public static void logout() {
 
