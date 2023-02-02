@@ -67,10 +67,11 @@ public class LoginGroupMethods extends WebDriverSettings {
             button_selectMail.click();
             input_login.sendKeys(SecretData.LOGIN);
             button_enter.click();
+            log.info("Выбрали почту и ввели логин");
         }
         input_pass.sendKeys(SecretData.PASSWORD);
         button_enter.click();
-
+        log.info("Ввели пароль и подтвердили");
     }
 
 

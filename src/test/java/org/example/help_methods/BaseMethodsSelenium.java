@@ -23,6 +23,7 @@ public class BaseMethodsSelenium extends WebDriverSettings {
 
     }
 
+
     public void clickElement(WebElement elementToClick) throws Exception {
         Thread.sleep(200);
         elementToClick.click();
