@@ -5,12 +5,12 @@ package org.example.tests;
  */
 public class Message {
     public String text;
-    public String Theme;
-    public String Reciever;
+    public String theme;
+    public String recipient;
 
-    public Message(String text, String theme, String reciever) {
+    public Message(String text, String theme, String recipient) {
         this.text = text;
-        Theme = theme;
-        Reciever = reciever;
+        this.theme = theme;
+        this.recipient = recipient;
     }
 }

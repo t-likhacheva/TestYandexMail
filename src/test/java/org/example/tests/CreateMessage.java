@@ -5,7 +5,7 @@ import org.example.help_methods.WebDriverSettings;
 import org.testng.annotations.Test;
 
 import static org.example.methods_front.drafts.DraftsMethods.checkInDrafts;
-import static org.example.methods_front.inbox.InboxMethods.openNewMail;
+import static org.example.methods_front.inbox.InboxMethods.*;
 import static org.example.methods_front.login.LoginGroupMethods.*;
 import static org.example.methods_front.newMessage.NewMessageMethods.*;
 

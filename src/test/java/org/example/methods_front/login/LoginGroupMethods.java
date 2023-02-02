@@ -15,7 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginGroupMethods extends WebDriverSettings {
 
     public static BaseMethodsSelenium baseMethods;
-    public static LoginGroupMethods loginGroupMethods;
+    public static LoginGroupMethods loginGroupMethods =new LoginGroupMethods(driver);;
 
     public LoginGroupMethods(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -52,8 +52,7 @@ public class LoginGroupMethods extends WebDriverSettings {
      */
     public static void login() {
 
-        baseMethods = new BaseMethodsSelenium(driver);
-        loginGroupMethods = new LoginGroupMethods(driver);
+
         driver.get(HOMEURL);
         log.info("Открыли стартовую страницу");
         if (button_login == null) {

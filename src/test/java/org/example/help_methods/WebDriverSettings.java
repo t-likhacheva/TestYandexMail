@@ -1,8 +1,10 @@
 package org.example.help_methods;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.methods_front.inbox.InboxMethods;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
@@ -10,18 +12,19 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class WebDriverSettings {
 
+
     public static WebDriver driver;
-    public static Integer PAGELOADTIMEOUT = 15;
+    public static BaseMethodsSelenium baseMethods;
 
     public static String HOMEURL = "https://mail.yandex.ru/";
-
-    //demo
+    public static Integer PAGELOADTIMEOUT = 15;
 
     /**Инициация веб-драйвера*/
     @BeforeTest
     public static void setUp() throws Exception {
         System.setProperty("webdriver.chrome.driver", "src/test/java/org/example/help_methods/chromedriver.exe");
         driver = new ChromeDriver();
+        baseMethods = new BaseMethodsSelenium(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(PAGELOADTIMEOUT, TimeUnit.SECONDS);
