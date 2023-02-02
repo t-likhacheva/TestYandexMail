@@ -3,14 +3,10 @@ package org.example.methods_front.login;
 import lombok.extern.slf4j.Slf4j;
 import org.example.help_methods.BaseMethodsSelenium;
 import org.example.help_methods.WebDriverSettings;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Классы помошники для страниц логина
@@ -49,9 +45,6 @@ public class LoginGroupMethods extends WebDriverSettings {
     @FindBy(id = "passp-field-passwd")
     /**Поле ввода пароля */
     public static WebElement input_pass;
-    public static String LOGIN = "test0.testovy";
-    public static String PASSWORD = "fotjavatest";
-
 
 
     /**
@@ -72,10 +65,10 @@ public class LoginGroupMethods extends WebDriverSettings {
 
         if (button_selectMail != null) {
             button_selectMail.click();
-            input_login.sendKeys(LOGIN);
+            input_login.sendKeys(SecretData.LOGIN);
             button_enter.click();
         }
-        input_pass.sendKeys(PASSWORD);
+        input_pass.sendKeys(SecretData.PASSWORD);
         button_enter.click();
 
     }

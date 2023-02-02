@@ -14,6 +14,7 @@ public class WebDriverSettings {
     public static Integer PAGELOADTIMEOUT = 15;
 
     public static String HOMEURL = "https://mail.yandex.ru/";
+
     //demo
 
     /**Инициация веб-драйвера*/
