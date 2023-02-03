@@ -2,6 +2,7 @@ package org.example.methods_front.drafts;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.help_methods.WebDriverSettings;
+import org.example.methods_front.login.LoginGroupMethods;
 import org.example.tests.Message;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +15,8 @@ import java.util.List;
 
 @Slf4j
 public class DraftsMethods extends WebDriverSettings {
+    public static DraftsMethods draftsMethodsraftsMethods =new DraftsMethods(driver);
+
     public DraftsMethods(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
@@ -56,8 +59,6 @@ public class DraftsMethods extends WebDriverSettings {
             }
 
         }
-
-
         log.info("Письма нет в списке черновиков");
         ;
     }
