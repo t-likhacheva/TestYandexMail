@@ -19,15 +19,17 @@ public class CreateMessageTest extends WebDriverSettings {
 
 
     @Test
-    public void testCreateMessage() {
+    public void testCreateMessage() throws InterruptedException {
         login();
         openNewMail();
         fillMessage(message);
         closeMessage();
         goToInput();
         goToDrafts();
+        Thread.sleep(3000);
         checkInDrafts(message);
         findAndOpenDraft(message);
+        Thread.sleep(3000);
         compareMessageParams(message);
         logout();
     }

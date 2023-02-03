@@ -48,10 +48,14 @@ public class DraftsMethods extends WebDriverSettings {
      */
     private static Message readMessageParamsFromWebElement(WebElement webElement) {
         String subject = webElement.findElement(By.xpath(".//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']/span")).getText();
-        //получаем текст письма
-        String text = webElement.findElement(By.xpath(".//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_firstline js-message-snippet-firstline']/span")).getText();
+//        log.info(subject);
         //получаем получателя письма
         String recipient = webElement.findElement(By.xpath(".//span[@class='mail-MessageSnippet-FromText']")).getText();
+//        log.info(recipient);
+        //получаем текст письма
+        String text = webElement.findElement(By.xpath(".//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_firstline js-message-snippet-firstline']/span")).getText();
+//        log.info(text);
+
         return new Message(recipient, subject, text);
     }
 
