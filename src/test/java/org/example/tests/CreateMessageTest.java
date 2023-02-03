@@ -14,13 +14,14 @@ import static org.example.methods_front.newMessage.NewMessageMethods.fillMessage
 
 
 public class CreateMessageTest extends WebDriverSettings {
+  private static   int ii = 70190;
+  private static   Message message = new Message("ififi@ya.ru", "Добро пожаловать" + ii, "Приветствую, ififi" + ii);
+
 
     @Test
     public void testCreateMessage() {
         login();
-        int ii = 70190;
         openNewMail();
-        Message message = new Message("ififi@ya.ru", "Добро пожаловать" + ii, "Приветствую, ififi" + ii);
         fillMessage(message);
         closeMessage();
         goToInput();
