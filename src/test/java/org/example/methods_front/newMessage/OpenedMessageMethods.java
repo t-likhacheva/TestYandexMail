@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 /**
  * Классы помошники для страниц логина
@@ -88,17 +89,12 @@ public class OpenedMessageMethods extends WebDriverSettings {
 
     public static void compareMessageParams(Message message) {
         Message mess = getMessageParams();
-        if (message.equals(mess)) {
-            log.info("Введенные в письме данные совпадают с письмом (тема: " + message.subject
+        Assert.assertEquals(mess,message);
+        log.info("Данные открытого письма совпадают с письмом (тема: " + message.subject
                     + ", получатель:" + message.recipient
-                    + ", текст: " + message.text + ")"
-            );
-        } else {
-            log.info("Введенные в письме данные НЕ совпадают с письмом  \n"
-                    + message.subject + message.recipient + message.text + "\n"
-                    + mess.subject + mess.recipient + mess.text
-            );
-        }
+                    + ", текст: " + message.text + ")");
+
+
 
     }
 

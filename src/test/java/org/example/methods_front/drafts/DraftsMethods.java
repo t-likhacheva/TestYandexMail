@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +77,7 @@ public class DraftsMethods extends WebDriverSettings {
     public static void checkInDrafts(Message message) {
         ArrayList<Message> listMes = takeMessList();
         int i = 0;
+        boolean b = true;
         for (Message mes : listMes) {
             if (mes.equals(message)) {
                 log.info("Письмо (тема: " + mes.subject + ", получатель:" + mes.recipient + ", текст: " + mes.text + ") есть в списке черновиков, Номенр по списку " + i);
