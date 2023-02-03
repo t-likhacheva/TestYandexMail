@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -18,35 +19,25 @@ public class DraftsMethods extends WebDriverSettings {
         this.driver = driver;
     }
 
+
     /**
-     * Список всех писем
+     * Получение массива всех писем (данные)
      */
-    @FindBy(xpath = "//div[@class='ns-view-container-desc mail-MessagesList js-messages-list']/div")
-    public static List<WebElement> drafts;
-
-    public static List<Message> takeMessList() {
-        List<Message> list = null;
-        List<WebElement> webElementList = driver.findElements(By.xpath("//div[@class='ns-view-container-desc mail-MessagesList js-messages-list']"));
+    public static ArrayList<Message> takeMessList() {
+        ArrayList<Message> list = new ArrayList<Message>();
+        List<WebElement> webElementList = driver.findElements(By.xpath("//div[@class='ns-view-container-desc mail-MessagesList js-messages-list']/div"));
+        //проходимся по списку писем и сохраняем данные в массив объектов типа Message
         for (WebElement webElement : webElementList) {
-            log.info("Корневой Элемент subject есть");
-            try {
-                WebElement subj = webElement.findElement(By.xpath(".//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']/span"));
-            } catch (Exception e) {
-                log.info("Элемент subject не найден");
-                return null;
-            }
-
-
-            log.info("Элемент subject есть");
+            //получаем тему
             String subject = webElement.findElement(By.xpath(".//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']/span")).getText();
-            log.info(subject);
+            //получаем текст письма
             String text = webElement.findElement(By.xpath(".//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_firstline js-message-snippet-firstline']/span")).getText();
+            //получаем получателя письма
             String recipient = webElement.findElement(By.xpath(".//span[@class='mail-MessageSnippet-FromText']")).getText();
             list.add(new Message(recipient, subject, text));
 
         }
-        log.info(list.toString());
-        return list;
+           return list;
 
     }
 

@@ -53,7 +53,7 @@ public class NewMessageMethods extends WebDriverSettings {
         log.info("ввели тему");
         input_text.sendKeys(message.text);
         log.info("ввели текст");
-        baseMethods.waitPage(3000);
+        baseMethods.waitPage(1000);
         log.info("немного подождали для автосохранения");
     }
 

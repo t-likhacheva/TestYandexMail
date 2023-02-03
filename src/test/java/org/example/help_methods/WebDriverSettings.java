@@ -1,11 +1,10 @@
 package org.example.help_methods;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.methods_front.inbox.InboxMethods;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,7 +18,9 @@ public class WebDriverSettings {
     public static String HOMEURL = "https://mail.yandex.ru/";
     public static Integer PAGELOADTIMEOUT = 15;
 
-    /**Инициация веб-драйвера*/
+    /**
+     * Инициация веб-драйвера
+     */
     @BeforeTest
     public static void setUp() throws Exception {
         System.setProperty("webdriver.chrome.driver", "src/test/java/org/example/help_methods/chromedriver.exe");
@@ -32,12 +33,14 @@ public class WebDriverSettings {
     }
 
 
-
-    /**Окончание работы, закрытие сессии*/
-      @AfterTest
+    /**
+     * Окончание работы, закрытие сессии
+     */
+    @AfterTest
     public static void tearDown() throws Exception {
         log.info("Выходим из UI");
         driver.quit();
-    }  }
+    }
+}
 
 
