@@ -14,7 +14,7 @@ public class BaseMethodsSelenium extends WebDriverSettings {
         PageFactory.initElements(driver, this);
         this.driver = driver;
         //таймаут в мс
-        MILLIS = 200;
+        MILLIS = 500;
     }
 
     public void openPage(String urlGet) throws Exception {

@@ -68,6 +68,11 @@ public class DraftsMethods extends WebDriverSettings {
             if (message.equals(readMessageParamsFromWebElement(webElement))) {
                 base.clickElement(webElement);
                 log.info("Открыли письмо");
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 return;
             }
         }

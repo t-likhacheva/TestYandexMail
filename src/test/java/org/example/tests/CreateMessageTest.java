@@ -14,22 +14,20 @@ import static org.example.methods_front.newMessage.OpenedMessageMethods.*;
 
 
 public class CreateMessageTest extends WebDriverSettings {
-  private static   int ii = 70193;
-  private static Message message = new Message("ififi@ya.ru", "Добро пожаловать" + ii, "Приветствую, ififi" + ii);
+    private static int ii = 56436;
+    private static Message message = new Message("ififi@ya.ru", "Добро пожаловать" + ii, "Приветствую, ififi" + ii);
 
 
     @Test
-    public void testCreateMessage() throws InterruptedException {
+    public void testCreateMessage()  {
         login();
         openNewMail();
         fillMessage(message);
         closeMessage();
         goToInput();
         goToDrafts();
-        Thread.sleep(3000);
         checkInDrafts(message);
         findAndOpenDraft(message);
-        Thread.sleep(3000);
         compareMessageParams(message);
         logout();
     }
