@@ -41,9 +41,9 @@ public class InboxMethods extends WebDriverSettings {
      */
     public static void openNewMail() {
         try {
-            button_new2.click();
+            base.clickElement(button_new2);
         } catch (NoSuchElementException e) {
-            button_new.click();
+            base.clickElement(button_new);
         }
 
 
@@ -52,7 +52,7 @@ public class InboxMethods extends WebDriverSettings {
     }
 
     public static void goToDrafts() {
-        button_drafts.click();
+        base.clickElement(button_drafts);
         log.info(" Перешли в черновики");
     }
     /**
@@ -61,7 +61,7 @@ public class InboxMethods extends WebDriverSettings {
     @FindBy(xpath = "//span[contains(text(),'Входящие')]/../..")
     public static WebElement button_input;
     public static void goToInput() {
-        button_input.click();
+        base.clickElement(button_input);
         log.info(" Перешли во входящие");
     }
 }

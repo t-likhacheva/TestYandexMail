@@ -26,10 +26,15 @@ public class BaseMethodsSelenium extends WebDriverSettings {
         return driver.findElement(By.linkText(text)).isDisplayed();
     }
 
-    public void clickElement(WebElement elementToClick) throws Exception {
-        Thread.sleep(MILLIS);
-        elementToClick.click();
-        Thread.sleep(MILLIS);
+    public void clickElement(WebElement elementToClick) {
+        try {
+            Thread.sleep(MILLIS);
+            elementToClick.click();
+            Thread.sleep(MILLIS);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public void clickElementJavaScript(WebElement elementToClick) throws Exception {
@@ -54,12 +59,18 @@ public class BaseMethodsSelenium extends WebDriverSettings {
         }
     }
 
-    public void inputText(String textToinput, WebElement inputField) throws Exception {
-        for (int i = 0; i < 20; i++) {
-            inputField.sendKeys(Keys.BACK_SPACE);
+    public void inputText(String textToinput, WebElement inputField) {
+        try {
+            for (int i = 0; i < 20; i++) {
+                inputField.sendKeys(Keys.BACK_SPACE);
+            }
+            Thread.sleep(MILLIS);
+            inputField.click();
+            inputField.sendKeys(textToinput);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
-        Thread.sleep(MILLIS);
-        inputField.click();
-        inputField.sendKeys(textToinput);
+
+
     }
 }

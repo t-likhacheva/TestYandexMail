@@ -14,13 +14,14 @@ import org.openqa.selenium.support.PageFactory;
 @Slf4j
 public class LoginGroupMethods extends WebDriverSettings {
 
-    public static BaseMethodsSelenium baseMethods;
-    public static LoginGroupMethods loginGroupMethods =new LoginGroupMethods(driver);;
+    public static LoginGroupMethods loginGroupMethods = new LoginGroupMethods(driver);
+    ;
 
     public LoginGroupMethods(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
+
     /**
      * Кнопка Войти в почту
      */
@@ -53,21 +54,17 @@ public class LoginGroupMethods extends WebDriverSettings {
     public static void login() {
         driver.get(HOMEURL);
         log.info("Открыли стартовую страницу");
-        if (button_login == null) {
-            log.info("error button_login is null");
-            return;
-        }
-        button_login.click();
+        base.clickElement(button_login);
         log.info("Перешли на страницу логина");
 
-        if (button_selectMail != null) {
-            button_selectMail.click();
-            input_login.sendKeys(SecretData.LOGIN);
-            button_enter.click();
-            log.info("Выбрали почту и ввели логин");
-        }
-        input_pass.sendKeys(SecretData.PASSWORD);
-        button_enter.click();
+        base.clickElement(button_selectMail);
+        base.inputText(SecretData.LOGIN,input_login);
+        base.clickElement(button_enter);
+        log.info("Выбрали почту и ввели логин");
+
+
+        base.inputText(SecretData.PASSWORD,input_pass);
+        base.clickElement(button_enter);
         log.info("Ввели пароль и подтвердили");
     }
 

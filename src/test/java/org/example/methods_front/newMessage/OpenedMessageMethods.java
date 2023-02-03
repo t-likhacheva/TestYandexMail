@@ -63,14 +63,14 @@ public class OpenedMessageMethods extends WebDriverSettings {
      * Заполнение сообщения
      */
     public static void fillMessage(Message message) {
-        input_recipient.sendKeys(message.recipient);
+        base.inputText(message.recipient, input_recipient);
         // System.out.printf("ввели получателя: %s", message.recipient);
         log.info("ввели получателя: " + message.recipient);
-        input_subject.sendKeys(message.subject);
+        base.inputText(message.subject, input_subject);
         log.info("ввели тему: " + message.subject);
-        input_text.sendKeys(message.text);
+        base.inputText(message.text, input_text);
         log.info("ввели текст: " + message.text);
-        baseMethods.waitPage(1000);
+        base.waitPage(1000);
         log.info("немного подождали для автосохранения");
     }
 
@@ -79,7 +79,7 @@ public class OpenedMessageMethods extends WebDriverSettings {
     public static WebElement close;
 
     public static void closeMessage() {
-        close.click();
+        base.clickElement(close);
         log.info("закрыли окно с письмом");
     }
 
@@ -89,11 +89,10 @@ public class OpenedMessageMethods extends WebDriverSettings {
 
     public static void compareMessageParams(Message message) {
         Message mess = getMessageParams();
-        Assert.assertEquals(mess,message);
+        Assert.assertEquals(mess, message);
         log.info("Данные открытого письма совпадают с письмом (тема: " + message.subject
-                    + ", получатель:" + message.recipient
-                    + ", текст: " + message.text + ")");
-
+                + ", получатель:" + message.recipient
+                + ", текст: " + message.text + ")");
 
 
     }

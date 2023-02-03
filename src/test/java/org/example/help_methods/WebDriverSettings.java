@@ -13,7 +13,7 @@ public class WebDriverSettings {
 
 
     public static WebDriver driver;
-    public static BaseMethodsSelenium baseMethods;
+    public static BaseMethodsSelenium base;
 
     public static String HOMEURL = "https://mail.yandex.ru/";
     public static Integer PAGELOADTIMEOUT = 15;
@@ -25,7 +25,7 @@ public class WebDriverSettings {
     public static void setUp() throws Exception {
         System.setProperty("webdriver.chrome.driver", "src/test/java/org/example/help_methods/chromedriver.exe");
         driver = new ChromeDriver();
-        baseMethods = new BaseMethodsSelenium(driver);
+        base = new BaseMethodsSelenium(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(PAGELOADTIMEOUT, TimeUnit.SECONDS);

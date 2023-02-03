@@ -66,7 +66,7 @@ public class DraftsMethods extends WebDriverSettings {
     public static void findAndOpenDraft(Message message) {
         for (WebElement webElement : webElementDraftList) {
             if (message.equals(readMessageParamsFromWebElement(webElement))) {
-                webElement.click();
+                base.clickElement(webElement);
                 log.info("Открыли письмо");
                 return;
             }
