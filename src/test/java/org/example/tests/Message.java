@@ -1,16 +1,18 @@
 package org.example.tests;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 /**
  * Объект описывающий Сообщение
  */
+@Data
+@AllArgsConstructor
 public class Message {
-    public String text;
-    public String theme;
     public String recipient;
+    public String subject;
+    public String text;
 
-    public Message(String text, String theme, String recipient) {
-        this.text = text;
-        this.theme = theme;
-        this.recipient = recipient;
-    }
+
+
 }

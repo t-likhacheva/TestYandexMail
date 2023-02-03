@@ -2,6 +2,7 @@ package org.example.methods_front.inbox;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.help_methods.WebDriverSettings;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -40,9 +41,9 @@ public class InboxMethods extends WebDriverSettings {
      */
     public static void openNewMail() {
         try {
-            button_new.click();
-        } catch (Exception e) {
             button_new2.click();
+        } catch (NoSuchElementException e) {
+            button_new.click();
         }
 
 
@@ -54,5 +55,13 @@ public class InboxMethods extends WebDriverSettings {
         button_drafts.click();
         log.info(" Перешли в черновики");
     }
-
+    /**
+     * Ссылка на входящие
+     */
+    @FindBy(xpath = "//span[contains(text(),'Входящие')]/../..")
+    public static WebElement button_input;
+    public static void goToInput() {
+        button_input.click();
+        log.info(" Перешли во входящие");
+    }
 }

@@ -20,13 +20,14 @@ public class DraftsMethods extends WebDriverSettings {
     }
 
 
+    @FindBy(xpath = "//div[@class='ns-view-container-desc mail-MessagesList js-messages-list']/div")
+    public static  List<WebElement> webElementList ;
     /**
      * Получение массива всех писем (данные)
      */
     public static ArrayList<Message> takeMessList() {
         ArrayList<Message> list = new ArrayList<Message>();
-        List<WebElement> webElementList = driver.findElements(By.xpath("//div[@class='ns-view-container-desc mail-MessagesList js-messages-list']/div"));
-        //проходимся по списку писем и сохраняем данные в массив объектов типа Message
+          //проходимся по списку писем и сохраняем данные в массив объектов типа Message
         for (WebElement webElement : webElementList) {
             //получаем тему
             String subject = webElement.findElement(By.xpath(".//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']/span")).getText();
@@ -37,12 +38,29 @@ public class DraftsMethods extends WebDriverSettings {
             list.add(new Message(recipient, subject, text));
 
         }
-           return list;
+        return list;
+
+    }
+    public static void findAndOpenDraft(Message message) {
+
 
     }
 
     public static void checkInDrafts(Message message) {
-        List<Message> list = takeMessList();
+        ArrayList<Message> listMes = takeMessList();
+        for (Message mes :
+                listMes) {
+            if (mes.equals(message)) {
+                log.info("Письмо (тема: " + mes.subject + ", получатель:" + mes.recipient + ", текст: " + mes.text + ") есть в списке черновиков");
+                return;
+            }
 
+        }
+
+
+        log.info("Письма нет в списке черновиков");
+        ;
     }
 }
+
+

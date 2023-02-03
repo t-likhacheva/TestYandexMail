@@ -1,9 +1,7 @@
 package org.example.methods_front.newMessage;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.help_methods.BaseMethodsSelenium;
 import org.example.help_methods.WebDriverSettings;
-import org.example.methods_front.inbox.InboxMethods;
 import org.example.tests.Message;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 public class NewMessageMethods extends WebDriverSettings {
 
     public static NewMessageMethods newMessageMethods = new NewMessageMethods(driver);
+
     public NewMessageMethods(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
@@ -48,17 +47,23 @@ public class NewMessageMethods extends WebDriverSettings {
      */
     public static void fillMessage(Message message) {
         input_recipient.sendKeys(message.recipient);
-        log.info("ввели получателя");
-        input_theme.sendKeys(message.theme);
-        log.info("ввели тему");
+        // System.out.printf("ввели получателя: %s", message.recipient);
+        log.info("ввели получателя: " + message.recipient);
+        input_theme.sendKeys(message.subject);
+        log.info("ввели тему: " + message.subject);
         input_text.sendKeys(message.text);
-        log.info("ввели текст");
+        log.info("ввели текст: " + message.text);
         baseMethods.waitPage(1000);
         log.info("немного подождали для автосохранения");
     }
 
-    public static void closeMessage() {
 
+    @FindBy(xpath = "//div[@class='ComposePopup-Body']//button[@aria-label='Закрыть']")
+    public static WebElement close;
+
+    public static void closeMessage() {
+        close.click();
+        log.info("закрыли окно с письмом");
     }
 
 
