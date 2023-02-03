@@ -2,7 +2,7 @@ package org.example.methods_front.drafts;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.help_methods.WebDriverSettings;
-import org.example.tests.Message;
+import org.example.models.Message;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +20,7 @@ public class DraftsMethods extends WebDriverSettings {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
+
 
     /**
      * Массив  всех писем (веб элемены)
@@ -42,6 +43,9 @@ public class DraftsMethods extends WebDriverSettings {
 
     }
 
+    /**
+     * Получение данных письма из вебэлемента
+     */
     private static Message readMessageParamsFromWebElement(WebElement webElement) {
         String subject = webElement.findElement(By.xpath(".//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']/span")).getText();
         //получаем текст письма
@@ -51,26 +55,26 @@ public class DraftsMethods extends WebDriverSettings {
         return new Message(recipient, subject, text);
     }
 
+    /**
+     * Ищем письмо и переходим в него
+     */
     public static void findAndOpenDraft(Message message) {
-//        for (WebElement webElement : webElementDraftList) {
-//
-//            //получаем тему
-//            String subject = webElement.findElement(By.xpath(".//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']/span")).getText();
-//            //получаем текст письма
-//            String text = webElement.findElement(By.xpath(".//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_firstline js-message-snippet-firstline']/span")).getText();
-//            //получаем получателя письма
-//            String recipient = webElement.findElement(By.xpath(".//span[@class='mail-MessageSnippet-FromText']")).getText();
-
-
+        for (WebElement webElement : webElementDraftList) {
+            if (message.equals(readMessageParamsFromWebElement(webElement))) {
+                webElement.click();
+                log.info("Открыли письмо");
+                return;
+            }
+        }
     }
 
 
     public static void checkInDrafts(Message message) {
         ArrayList<Message> listMes = takeMessList();
-        int i =0;
+        int i = 0;
         for (Message mes : listMes) {
             if (mes.equals(message)) {
-                log.info("Письмо (тема: " + mes.subject + ", получатель:" + mes.recipient + ", текст: " + mes.text + ") есть в списке черновиков, Номенр по списку "+i);
+                log.info("Письмо (тема: " + mes.subject + ", получатель:" + mes.recipient + ", текст: " + mes.text + ") есть в списке черновиков, Номенр по списку " + i);
                 return;
             }
             i++;
