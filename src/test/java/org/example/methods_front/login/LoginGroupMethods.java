@@ -25,7 +25,8 @@ public class LoginGroupMethods extends WebDriverSettings {
      */
     @FindBy(xpath = "//span[contains(text(),'Войти в Почту')]/..")
     public static WebElement button_login;
-
+    @FindBy(xpath = "//span[contains(text(),'Войти')]/../..")
+    public static WebElement button_login_new;
     /**
      * Кнопка Выбрать почту для ввода логина
      */
@@ -44,7 +45,16 @@ public class LoginGroupMethods extends WebDriverSettings {
     @FindBy(id = "passp-field-passwd")
     /**Поле ввода пароля */
     public static WebElement input_pass;
-
+    /**
+     * Кнопка выйти из почты
+     */
+    @FindBy(xpath = "//span[contains(text(),'Выйти из сервисов Яндекса')]/..")
+    public static WebElement button_logout;
+    /**
+     * Иконка профиля -выход на меню профиля
+     */
+    @FindBy(xpath = "//div[@class=\"PSHeader-User promozavr-anchor-user\"]//a")
+    public static WebElement button_profile;
 
     /**
      * ввод логина и пароля (через аннотации и переменные класса )
@@ -52,7 +62,7 @@ public class LoginGroupMethods extends WebDriverSettings {
     public static void login() {
         driver.get(HOMEURL);
         log.info("Открыли стартовую страницу");
-        base.clickElement(button_login);
+        base.clickElement(button_login_new);
         log.info("Перешли на страницу логина");
 
         base.clickElement(button_selectMail);
@@ -68,7 +78,9 @@ public class LoginGroupMethods extends WebDriverSettings {
 
 
     public static void logout() {
-
+        base.clickElement(button_profile);
+        base.clickElement(button_logout);
+        log.info("Вышли из почты");
 
     }
 }

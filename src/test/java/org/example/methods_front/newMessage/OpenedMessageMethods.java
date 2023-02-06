@@ -73,7 +73,7 @@ public class OpenedMessageMethods extends WebDriverSettings {
         log.info("ввели тему: " + message.subject);
         base.inputText(message.text, input_text);
         log.info("ввели текст: " + message.text);
-        base.waitPage(1000);
+        base.waitPage(4000);
         log.info("немного подождали для автосохранения");
     }
 
