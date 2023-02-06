@@ -7,8 +7,7 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
-import static org.example.methods_front.drafts.DraftsMethods.checkInDrafts;
-import static org.example.methods_front.drafts.DraftsMethods.findAndOpenDraft;
+import static org.example.methods_front.drafts.DraftsMethods.*;
 import static org.example.methods_front.inbox.InboxMethods.*;
 import static org.example.methods_front.login.LoginGroupMethods.login;
 import static org.example.methods_front.login.LoginGroupMethods.logout;
@@ -50,11 +49,7 @@ public class CreateMessageTest extends WebDriverSettings {
         }
         goToInput();
         goToDrafts();
-        for (int i = 0; i < iter; i++) {
-            if (i==2||i==3)
-            findAndOpenDraft(message);
-        }
-
+        selectAllCheckBox(mesList);
         logout();
     }
 

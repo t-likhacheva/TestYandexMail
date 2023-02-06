@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +94,25 @@ public class DraftsMethods extends WebDriverSettings {
         log.info("Письма нет в списке черновиков");
         ;
     }
+
+
+    public static void selectAllCheckBox(ArrayList<Message> listMesToSelect) {
+        Integer i = 0;
+        for (WebElement webElement : webElementDraftList) {
+            Message mes = readMessageParamsFromWebElement(webElement);
+            if (listMesToSelect.contains(mes)) {
+                log.info("Нашли письмо в списке по номером " + i + " и ставим чекбокс");
+                selectCheckBox(webElement);
+            }
+            i++;
+        }
+        log.info("Письма нет в списке черновиков");
+        ;
+    }
+
+    private static void selectCheckBox(WebElement webElement) {
+    }
+
 }
 
 
