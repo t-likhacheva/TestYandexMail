@@ -14,12 +14,12 @@ import static org.example.methods_front.newMessage.OpenedMessageMethods.*;
 
 
 public class CreateMessageTest extends WebDriverSettings {
-    private static int ii = 56436;
-    private static Message message = new Message("ififi@ya.ru", "Добро пожаловать" + ii, "Приветствую, ififi" + ii);
+    public   Message message;
 
 
-    @Test
+    @Test(description = "Проверка создания сообщения и сохранения в черновиках»", groups = {"Base"}, priority = 100)
     public void testCreateMessage()  {
+        message= message.fillObjectRandomParameters();
         login();
         openNewMail();
         fillMessage(message);
