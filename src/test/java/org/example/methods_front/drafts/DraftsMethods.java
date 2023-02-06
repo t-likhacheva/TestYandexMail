@@ -15,13 +15,13 @@ import java.util.List;
 
 @Slf4j
 public class DraftsMethods extends WebDriverSettings {
-    public static DraftsMethods draftsMethodsraftsMethods = new DraftsMethods(driver);
 
     public DraftsMethods(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
 
+    public static DraftsMethods draftsMethodsraftsMethods = new DraftsMethods(driver);
 
     /**
      * Массив  всех писем (веб элемены)
@@ -78,7 +78,9 @@ public class DraftsMethods extends WebDriverSettings {
         }
     }
 
-
+    /**
+     * Ищем письмо message в списке черновиков
+     */
     public static void checkInDrafts(Message message) {
         ArrayList<Message> listMes = takeMessList();
         int i = 0;

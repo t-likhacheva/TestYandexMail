@@ -14,12 +14,12 @@ import org.openqa.selenium.support.PageFactory;
 @Slf4j
 public class InboxMethods extends WebDriverSettings {
 
-    public static InboxMethods inboxMethods = new InboxMethods(driver);
 
     public InboxMethods(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
+    public static InboxMethods inboxMethods = new InboxMethods(driver);
 
     /**
      * Кнопка Написать письмо
@@ -35,6 +35,13 @@ public class InboxMethods extends WebDriverSettings {
      */
     @FindBy(xpath = "//span[contains(text(),'Черновики')]/../..")
     public static WebElement button_drafts;
+    /**
+     * Ссылка на входящие
+     */
+    @FindBy(xpath = "//span[contains(text(),'Входящие')]/../..")
+    public static WebElement button_input;
+
+
 
     /**
      * Открытие нового письма
@@ -51,15 +58,18 @@ public class InboxMethods extends WebDriverSettings {
 
     }
 
+    /**
+     * Переход к черновикам
+     */
     public static void goToDrafts() {
         base.clickElement(button_drafts);
         log.info(" Перешли в черновики");
     }
+
+
     /**
-     * Ссылка на входящие
+     * Переход к входящим
      */
-    @FindBy(xpath = "//span[contains(text(),'Входящие')]/../..")
-    public static WebElement button_input;
     public static void goToInput() {
         base.clickElement(button_input);
         log.info(" Перешли во входящие");

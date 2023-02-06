@@ -14,14 +14,12 @@ import org.openqa.selenium.support.PageFactory;
 @Slf4j
 public class LoginGroupMethods extends WebDriverSettings {
 
-    public static LoginGroupMethods loginGroupMethods = new LoginGroupMethods(driver);
-    ;
-
     public LoginGroupMethods(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
-
+    public static LoginGroupMethods loginGroupMethods = new LoginGroupMethods(driver);
+    ;
     /**
      * Кнопка Войти в почту
      */

@@ -15,12 +15,12 @@ import org.testng.Assert;
 @Slf4j
 public class OpenedMessageMethods extends WebDriverSettings {
 
-    public static OpenedMessageMethods openedMessageMethods = new OpenedMessageMethods(driver);
 
     public OpenedMessageMethods(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
+    public static OpenedMessageMethods openedMessageMethods = new OpenedMessageMethods(driver);
 
     /**
      * Поле Кому
@@ -32,8 +32,6 @@ public class OpenedMessageMethods extends WebDriverSettings {
      */
     @FindBy(xpath = "//div[@title='Кому']//div[@class='ComposeYabble-Text']")
     public static WebElement input_recipient_value;
-
-
     /**
      * Поле Копия
      */
@@ -58,6 +56,11 @@ public class OpenedMessageMethods extends WebDriverSettings {
      */
     @FindBy(xpath = "//div[@title='Напишите что-нибудь']/div")
     public static WebElement input_text_value;
+    /**
+     * Кнопка закрытия всплявающего окна
+     */
+    @FindBy(xpath = "//div[@class='ComposePopup-Body']//button[@aria-label='Закрыть']")
+    public static WebElement close;
 
     /**
      * Заполнение сообщения
@@ -75,8 +78,7 @@ public class OpenedMessageMethods extends WebDriverSettings {
     }
 
 
-    @FindBy(xpath = "//div[@class='ComposePopup-Body']//button[@aria-label='Закрыть']")
-    public static WebElement close;
+
 
     public static void closeMessage() {
         base.clickElement(close);
