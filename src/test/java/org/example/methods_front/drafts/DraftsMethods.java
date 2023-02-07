@@ -142,10 +142,10 @@ public class DraftsMethods extends WebDriverSettings {
 
 
     private static void selectCheckBox(WebElement webElement) {
-        if (!webElement.findElement(By.xpath(xpathCheckBox)).isSelected()) {
+        if (!webElement.findElement(By.xpath(xpathCheckBox+"//input")).isSelected()) {
             webElement.findElement(By.xpath(xpathCheckBox)).click();
         }
-        if (!webElement.findElement(By.xpath(xpathCheckBox"//input")).isSelected()) {
+        if (!webElement.findElement(By.xpath(xpathCheckBox+"//input")).isSelected()) {
             log.error("Проставить чекбокс НЕ удалось");
         } else log.info("Проставили чекбокс");
 
