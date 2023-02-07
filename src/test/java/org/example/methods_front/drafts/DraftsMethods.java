@@ -6,6 +6,7 @@ import org.example.methods_front.inbox.InboxMethods;
 import org.example.methods_front.newMessage.OpenedMessageMethods;
 import org.example.models.Message;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -84,7 +85,13 @@ public class DraftsMethods extends WebDriverSettings {
         String subject = webElement.findElement(By.xpath(xpathSubjectInList)).getText();
 //        log.info(subject);
         //получаем получателя письма
-        String recipient = webElement.findElement(By.xpath(xpathRecipientInList)).getText();
+        String recipient = null;
+        try {
+            recipient = webElement.findElement(By.xpath(xpathRecipientInList)).getText();
+        } catch (NoSuchElementException e) {
+            log.info("Темы нет в списке");
+        }
+
 //        log.info(recipient);
         //получаем текст письм
         String text = webElement.findElement(By.xpath(xpathTextInList)).getText();
@@ -113,19 +120,18 @@ public class DraftsMethods extends WebDriverSettings {
     /**
      * Ищем письмо message в списке черновиков
      */
-    public static void checkInDrafts(Message message) {
+    public static Boolean checkInDrafts(Message message) {
         ArrayList<Message> listMes = takeMessList();
         int i = 0;
-        boolean b = true;
         for (Message mes : listMes) {
             if (mes.equals(message)) {
-                log.info(mes.toString() + " есть в списке черновиков, Номер по списку " + i);
-                return;
+                log.info(message.toString() + " есть в списке черновиков, Номер по списку " + i);
+                return true;
             }
             i++;
         }
-        log.error("Письма нет в списке черновиков");
-        ;
+        log.error(message.toString() +" нет в списке черновиков");
+        return false;
     }
 
 
@@ -142,6 +148,20 @@ public class DraftsMethods extends WebDriverSettings {
         if (!flag) {
             log.error("Письма нет в списке черновиков, поставить чекбокс не удалось");
         }
+    }
+
+    public static boolean checkInImportant(Message message) {
+        ArrayList<Message> listMes = takeMessList();
+        int i = 0;
+        for (Message mes : listMes) {
+            if (mes.equalsWithoutRecipient(message)) {
+                log.info(message.toString() + " есть в списке Важных, Номер по списку " + i);
+                return true;
+            }
+            i++;
+        }
+        log.error(message.toString() +" нет в списке черновиков");
+        return false;
     }
 
 

@@ -1,8 +1,10 @@
 package org.example.tests;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.help_methods.WebDriverSettings;
 import org.example.models.Message;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -11,15 +13,14 @@ import static org.example.methods_front.drafts.DraftsMethods.*;
 import static org.example.methods_front.inbox.InboxMethods.*;
 import static org.example.methods_front.login.LoginGroupMethods.login;
 import static org.example.methods_front.login.LoginGroupMethods.logout;
-import static org.example.methods_front.newMessage.OpenedMessageMethods.closeMessage;
-import static org.example.methods_front.newMessage.OpenedMessageMethods.fillMessage;
+import static org.example.methods_front.newMessage.OpenedMessageMethods.*;
 
-
+@Slf4j
 public class CreateMessageTest extends WebDriverSettings {
     /**
      * Кол-во создаваемых сообщений
      */
-    private Integer count = 3 ;
+    private Integer count = 3;
     /**
      * Массив с индексами для выделения и удаления,максимальный должен быть меньше count
      */
@@ -33,12 +34,11 @@ public class CreateMessageTest extends WebDriverSettings {
         openNewMail();
         fillMessage(message);
         closeMessage();
-        ArrayList<Message> mesList = fillArrayDrafts(count);
         goToInput();
         goToDrafts();
-        checkInDrafts(message);
+        Assert.assertTrue(checkInDrafts(message));
         findAndOpenDraft(message);
-        //    compareMessageParams(message);
+        compareMessageParams(message);
         closeMessage();
         logout();
     }
@@ -52,9 +52,9 @@ public class CreateMessageTest extends WebDriverSettings {
         goToDrafts();
         selectCheckBox(mesListCheked);
         deleteSelected();
-
         logout();
     }
+
     @Test(description = "Проверка создания 5 сообщений, проставление флага важности 2 письмам|через общее выдление, частичное удаление  писем (важность, чекбокс по совпадению)»", groups = {"Base"}, priority = 90)
     public void testComplex1() {
         login();
@@ -68,14 +68,24 @@ public class CreateMessageTest extends WebDriverSettings {
         selectCheckBox(mesListChekedToImportant);
         clickImportantFlagWhenSelected();
         goToImportant();
-        for (Message mes :
-                mesListChekedToImportant) {
-            checkInDrafts(mes);
-        }
+//        for (Message mes :
+//                mesListChekedToImportant) {
+//            checkInImportant(mes);
+//        }
+//        ArrayList<Message> mesListImp =getAllMessagesFromImportant();
         selectAllCheckBox();
         deleteSelected();
+        goToDrafts();
+        for (Message mes : mesList) {
+            if (mesListChekedToDelete.contains(mes) || mesListChekedToImportant.contains(mes)) {
+                Assert.assertFalse(checkInDrafts(mes));
+            } else Assert.assertTrue(checkInDrafts(mes));
+        }
+        ;
         logout();
     }
+
+
 
 
 }

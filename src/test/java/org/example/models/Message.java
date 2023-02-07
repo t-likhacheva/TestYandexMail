@@ -43,6 +43,11 @@ public class Message {
         this.subject = "Тема: Добро пожаловать" + i;
         this.text = "Текст: Приветствую, ififi" + i ;
     }
-
+    public boolean equalsWithoutRecipient(Message message) {
+        if (this == message) return true;
+        if (message == null) return false;
+        return subject.equals(message.subject) &&
+                text.equals(message.text);
+    }
 
 }
