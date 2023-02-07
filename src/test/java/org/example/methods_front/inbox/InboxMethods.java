@@ -41,6 +41,12 @@ public class InboxMethods extends WebDriverSettings {
     @FindBy(xpath = "//span[contains(text(),'Входящие')]/../..")
     public static WebElement button_input;
 
+    /**
+     * Ссылка на важные
+     */
+    @FindBy(xpath = " //*[@href=\"#important\"]")
+    public static WebElement button_important;
+
 
 
     /**
@@ -66,6 +72,13 @@ public class InboxMethods extends WebDriverSettings {
         log.info(" Перешли в черновики");
     }
 
+    /**
+     * Переход к письмам с пометкой Важно
+     */
+    public static void goToImportant() {
+        base.clickElement(button_important);
+        log.info(" Перешли в черновики");
+    }
 
     /**
      * Переход к входящим

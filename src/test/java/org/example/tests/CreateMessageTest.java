@@ -23,7 +23,8 @@ public class CreateMessageTest extends WebDriverSettings {
     /**
      * Массив с индексами для выделения и удаления,максимальный должен быть меньше count
      */
-    private Integer[] indexArray = {1, 3};
+    private Integer[] indexArrayToDel = {1, 3};
+    private Integer[] indexArrayToImportant = {2, 4};
 
     @Test(description = "Проверка создания сообщения и сохранения в черновиках»", groups = {"Base"}, priority = 100)
     public void testCreateMessage() {
@@ -45,11 +46,27 @@ public class CreateMessageTest extends WebDriverSettings {
     public void testComplex() {
         login();
         ArrayList<Message> mesList = fillArrayDrafts(count);
-        ArrayList<Message> mesListCheked = Message.getPartOfArray(mesList, indexArray);
+        ArrayList<Message> mesListCheked = Message.getPartOfArray(mesList, indexArrayToDel);
         goToInput();
         goToDrafts();
         selectCheckBox(mesListCheked);
         deleteSelected();
+
+        logout();
+    }
+    @Test(description = "Проверка создания 5 сообщений, проставление флага важности 2 письмам|через общее выдление, частичное удаление  писем (важность, чекбокс по совпадению)»", groups = {"Base"}, priority = 90)
+    public void testComplex1() {
+        login();
+        ArrayList<Message> mesList = fillArrayDrafts(count);
+        ArrayList<Message> mesListChekedToDelete = Message.getPartOfArray(mesList, indexArrayToDel);
+        ArrayList<Message> mesListChekedToImportant = Message.getPartOfArray(mesList, indexArrayToImportant);
+        goToInput();
+        goToDrafts();
+        selectCheckBox(mesListChekedToDelete);
+        deleteSelected();
+        selectCheckBox(mesListChekedToImportant);
+        clickImportantFlagWhenSelected();
+        goToImportant();
 
         logout();
     }

@@ -37,6 +37,21 @@ public class DraftsMethods extends WebDriverSettings {
      */
     @FindBy(xpath = "//span[contains(text(),'Удалить')]/..")
     public static WebElement button_delete;
+    /**
+     * Кнопка меню "Еще" или "..."
+     */
+    @FindBy(xpath = "//div[@title='Ещё']")
+    public static WebElement button_menu;
+    /**
+     * Кнопка в всплывающем меню -> Метка
+     */
+    @FindBy(xpath = "//span[contains(text(),'Метка')]/..")
+    public static WebElement button_label;
+    /**
+     * Кнопка в всплывающем меню -> Метка-> Важные
+     */
+    @FindBy(xpath = "//a[contains(text(),'Важные')]/..")
+    public static WebElement button_important;
 
 
     /**
@@ -97,7 +112,7 @@ public class DraftsMethods extends WebDriverSettings {
         boolean b = true;
         for (Message mes : listMes) {
             if (mes.equals(message)) {
-                log.info(mes.toString() +" есть в списке черновиков, Номер по списку " + i);
+                log.info(mes.toString() + " есть в списке черновиков, Номер по списку " + i);
                 return;
             }
             i++;
@@ -108,23 +123,40 @@ public class DraftsMethods extends WebDriverSettings {
 
 
     public static void selectCheckBox(ArrayList<Message> listMesToSelect) {
+        Boolean flag = false;
         for (WebElement webElement : webElementDraftList) {
             Message mes = readMessageParamsFromWebElement(webElement);
             if (listMesToSelect.contains(mes)) {
                 selectCheckBox(webElement);
                 log.info("Нашли письмо " + mes.toString());
+                flag = true;
             }
         }
-        log.error("Письма нет в списке черновиков, поставить чекбокс не удалось");
-        ;
+        if (!flag) {
+            log.error("Письма нет в списке черновиков, поставить чекбокс не удалось");
+        }
     }
+
+
+
 
 
     private static void selectCheckBox(WebElement webElement) {
         if (!webElement.findElement(By.xpath(xpathCheckBox)).isSelected()) {
             webElement.findElement(By.xpath(xpathCheckBox)).click();
-            log.info("Проставили чекбокс");
         }
+        if (!webElement.findElement(By.xpath(xpathCheckBox"//input")).isSelected()) {
+            log.error("Проставить чекбокс НЕ удалось");
+        } else log.info("Проставили чекбокс");
+
+    }
+
+    public static void clickImportantFlagWhenSelected() {
+//        base.clickElement(button_menu);
+        base.clickElement(button_label);
+        base.clickElement(button_important);
+        log.info("Проставили флаг Важные");
+
     }
 
     public static void selectAllCheckBox() {
