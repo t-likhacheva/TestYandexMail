@@ -2,6 +2,8 @@ package org.example.methods_front.drafts;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.help_methods.WebDriverSettings;
+import org.example.methods_front.inbox.InboxMethods;
+import org.example.methods_front.newMessage.OpenedMessageMethods;
 import org.example.models.Message;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -136,6 +138,23 @@ public class DraftsMethods extends WebDriverSettings {
         log.info("Нажали кнопку Удалить");
     }
 
+    /**
+     * Создание count писем-черновиков
+     *
+     * @param count
+     * @return созданные письма
+     */
+    public static ArrayList<Message> fillArrayDrafts(Integer count) {
+        ArrayList<Message> mesList = new ArrayList<Message>(count);
+        for (int i = 0; i < count; i++) {
+            Message mes = new Message();
+            mesList.add(mes);
+            InboxMethods.openNewMail();
+            OpenedMessageMethods.fillMessage(mes);
+            OpenedMessageMethods.closeMessage();
+        }
+        return mesList;
+    }
 }
 
 

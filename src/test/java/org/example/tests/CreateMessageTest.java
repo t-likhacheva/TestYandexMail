@@ -45,43 +45,13 @@ public class CreateMessageTest extends WebDriverSettings {
     public void testComplex() {
         login();
         ArrayList<Message> mesList = fillArrayDrafts(count);
-        ArrayList<Message> mesListCheked = getPartOfArray(mesList, indexArray);
+        ArrayList<Message> mesListCheked = Message.getPartOfArray(mesList, indexArray);
         goToInput();
         goToDrafts();
         selectCheckBox(mesListCheked);
         deleteSelected();
+
         logout();
-    }
-
-    /**
-     * Создание подмассива сообщений - выборка из   mesList с индексами   indexArray
-     * @return Возвращает созданный подмассив
-     */
-    private static ArrayList<Message> getPartOfArray(ArrayList<Message> mesList, Integer[] indexArray) {
-        ArrayList<Message> mesListCheked = new ArrayList<Message>();
-        for (int i : indexArray) {
-            mesListCheked.add(mesList.get(i));
-        }
-        return mesListCheked;
-    }
-
-
-    /**
-     * Создание count писем-черновиков
-     *
-     * @param count
-     * @return созданные письма
-     */
-    public ArrayList<Message> fillArrayDrafts(Integer count) {
-        ArrayList<Message> mesList = new ArrayList<Message>(count);
-        for (int i = 0; i < count; i++) {
-            Message mes = new Message();
-            mesList.add(mes);
-            openNewMail();
-            fillMessage(mes);
-            closeMessage();
-        }
-        return mesList;
     }
 
 
