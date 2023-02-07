@@ -17,10 +17,18 @@ import java.util.List;
 @Slf4j
 public class DraftsMethods extends WebDriverSettings {
 
+
     public DraftsMethods(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
+
+    /**
+     * Xpath -ы  для полей сообщения в списке относительно ВЕБЭЛЕМЕНТА списка
+     */
+    private static String xpathSubjectInList = ".//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']/span";
+    private static String xpathRecipientInList = ".//span[@class='mail-MessageSnippet-FromText']";
+    private static String xpathTextInList = ".//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_firstline js-message-snippet-firstline']/span";
 
     public static DraftsMethods draftsMethodsraftsMethods = new DraftsMethods(driver);
     /**
@@ -73,15 +81,14 @@ public class DraftsMethods extends WebDriverSettings {
      * Получение данных письма из вебэлемента
      */
     private static Message readMessageParamsFromWebElement(WebElement webElement) {
-        String subject = webElement.findElement(By.xpath(".//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']/span")).getText();
+        String subject = webElement.findElement(By.xpath(xpathSubjectInList)).getText();
 //        log.info(subject);
         //получаем получателя письма
-        String recipient = webElement.findElement(By.xpath(".//span[@class='mail-MessageSnippet-FromText']")).getText();
+        String recipient = webElement.findElement(By.xpath(xpathRecipientInList)).getText();
 //        log.info(recipient);
-        //получаем текст письма
-        String text = webElement.findElement(By.xpath(".//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_firstline js-message-snippet-firstline']/span")).getText();
+        //получаем текст письм
+        String text = webElement.findElement(By.xpath(xpathTextInList)).getText();
 //        log.info(text);
-
         return new Message(recipient, subject, text);
     }
 
@@ -138,14 +145,11 @@ public class DraftsMethods extends WebDriverSettings {
     }
 
 
-
-
-
     private static void selectCheckBox(WebElement webElement) {
-        if (!webElement.findElement(By.xpath(xpathCheckBox+"//input")).isSelected()) {
-            webElement.findElement(By.xpath(xpathCheckBox)).click();
+        if (!webElement.findElement(By.xpath(xpathCheckBox + "//input")).isSelected()) {
+            base.clickElement(webElement.findElement(By.xpath(xpathCheckBox)));
         }
-        if (!webElement.findElement(By.xpath(xpathCheckBox+"//input")).isSelected()) {
+        if (!webElement.findElement(By.xpath(xpathCheckBox + "//input")).isSelected()) {
             log.error("Проставить чекбокс НЕ удалось");
         } else log.info("Проставили чекбокс");
 

@@ -19,12 +19,12 @@ public class CreateMessageTest extends WebDriverSettings {
     /**
      * Кол-во создаваемых сообщений
      */
-    private Integer count = 5 ;
+    private Integer count = 3 ;
     /**
      * Массив с индексами для выделения и удаления,максимальный должен быть меньше count
      */
-    private Integer[] indexArrayToDel = {1, 3};
-    private Integer[] indexArrayToImportant = {2, 4};
+    private Integer[] indexArrayToDel = {1};
+    private Integer[] indexArrayToImportant = {2};
 
     @Test(description = "Проверка создания сообщения и сохранения в черновиках»", groups = {"Base"}, priority = 100)
     public void testCreateMessage() {
@@ -33,6 +33,7 @@ public class CreateMessageTest extends WebDriverSettings {
         openNewMail();
         fillMessage(message);
         closeMessage();
+        ArrayList<Message> mesList = fillArrayDrafts(count);
         goToInput();
         goToDrafts();
         checkInDrafts(message);
@@ -67,7 +68,12 @@ public class CreateMessageTest extends WebDriverSettings {
         selectCheckBox(mesListChekedToImportant);
         clickImportantFlagWhenSelected();
         goToImportant();
-
+        for (Message mes :
+                mesListChekedToImportant) {
+            checkInDrafts(mes);
+        }
+        selectAllCheckBox();
+        deleteSelected();
         logout();
     }
 

@@ -77,7 +77,7 @@ public class InboxMethods extends WebDriverSettings {
      */
     public static void goToImportant() {
         base.clickElement(button_important);
-        log.info(" Перешли в черновики");
+        log.info(" Перешли в раздел Важные");
     }
 
     /**

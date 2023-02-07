@@ -61,13 +61,14 @@ public class BaseMethodsSelenium extends WebDriverSettings {
 
     public void inputText(String textToinput, WebElement inputField) {
         try {
-            for (int i = 0; i < 20; i++) {
-                inputField.sendKeys(Keys.BACK_SPACE);
-            }
-            Thread.sleep(MILLIS);
+//            for (int i = 0; i < 20; i++) {
+//                inputField.sendKeys(Keys.BACK_SPACE);
+//            }
+//            Thread.sleep(MILLIS);
+            inputField.clear();
             inputField.click();
             inputField.sendKeys(textToinput);
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
