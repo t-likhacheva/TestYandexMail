@@ -68,12 +68,11 @@ public class CreateMessageTest extends WebDriverSettings {
         selectCheckBox(mesListChekedToImportant);
         clickImportantFlagWhenSelected();
         goToImportant();
-//        for (Message mes :
-//                mesListChekedToImportant) {
-//            checkInImportant(mes);
-//        }
-//        ArrayList<Message> mesListImp =getAllMessagesFromImportant();
-        selectAllCheckBox();
+        for (Message mes :
+                mesListChekedToImportant) {
+            Assert.assertTrue(checkInImportant(mes));
+        }
+          selectAllCheckBox();
         deleteSelected();
         goToDrafts();
         for (Message mes : mesList) {
