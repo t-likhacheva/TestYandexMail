@@ -19,11 +19,11 @@ public class CreateMessageTest extends WebDriverSettings {
     /**
      * Кол-во создаваемых сообщений
      */
-    private Integer count = 4;
+    private Integer count = 5 ;
     /**
      * Массив с индексами для выделения и удаления,максимальный должен быть меньше count
      */
-    private Integer[] indexArray = {2, 3};
+    private Integer[] indexArray = {1, 3};
 
     @Test(description = "Проверка создания сообщения и сохранения в черновиках»", groups = {"Base"}, priority = 100)
     public void testCreateMessage() {

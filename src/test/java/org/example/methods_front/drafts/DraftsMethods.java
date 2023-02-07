@@ -95,7 +95,7 @@ public class DraftsMethods extends WebDriverSettings {
         boolean b = true;
         for (Message mes : listMes) {
             if (mes.equals(message)) {
-                log.info("Письмо (тема: " + mes.subject + ", получатель:" + mes.recipient + ", текст: " + mes.text + ") есть в списке черновиков, Номенр по списку " + i);
+                log.info(mes.toString() +" есть в списке черновиков, Номер по списку " + i);
                 return;
             }
             i++;
@@ -106,14 +106,12 @@ public class DraftsMethods extends WebDriverSettings {
 
 
     public static void selectCheckBox(ArrayList<Message> listMesToSelect) {
-        Integer i = 0;
         for (WebElement webElement : webElementDraftList) {
             Message mes = readMessageParamsFromWebElement(webElement);
             if (listMesToSelect.contains(mes)) {
-                log.info("Нашли письмо в списке черновиков по номером " + i);
                 selectCheckBox(webElement);
+                log.info("Нашли письмо " + mes.toString());
             }
-            i++;
         }
         log.error("Письма нет в списке черновиков, поставить чекбокс не удалось");
         ;

@@ -13,6 +13,12 @@ public class Message {
     public String subject;
     public String text;
 
+   @Override
+    public String toString() {
+        return "Message [recipient=" + recipient
+                + ", subject=" + subject
+                + "]";
+    }
     /**
      * Конструктор, заполняющий рандомными значениями
      */
