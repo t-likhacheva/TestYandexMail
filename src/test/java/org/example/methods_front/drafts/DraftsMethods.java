@@ -96,7 +96,7 @@ public class DraftsMethods extends WebDriverSettings {
     }
 
 
-    public static void selectAllCheckBox(ArrayList<Message> listMesToSelect) {
+    public static void selectCheckBox(ArrayList<Message> listMesToSelect) {
         Integer i = 0;
         for (WebElement webElement : webElementDraftList) {
             Message mes = readMessageParamsFromWebElement(webElement);

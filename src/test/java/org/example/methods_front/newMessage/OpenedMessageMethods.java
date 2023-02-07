@@ -9,6 +9,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import java.util.ArrayList;
+
+import static org.example.methods_front.inbox.InboxMethods.openNewMail;
+
+
 /**
  * Классы помошники для страниц логина
  */
@@ -98,5 +103,7 @@ public class OpenedMessageMethods extends WebDriverSettings {
 
 
     }
+
+
 
 }

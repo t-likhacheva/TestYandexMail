@@ -13,10 +13,15 @@ public class Message {
     public String subject;
     public String text;
 
-
-    public static  Message fillObjectRandomParameters() {
-
+    /**
+     * Конструктор, заполняющий рандомными значениями
+     */
+    public Message() {
         int i= (int)(Math.random()*1000000);
-        return new Message("ififi"+i+"@ya.ru", "Добро пожаловать" + i, "Приветствую, ififi" + i);
+        this.recipient = "recieverMail"+i+"@ya.ru";
+        this.subject = "Тема: Добро пожаловать" + i;
+        this.text = "Текст: Приветствую, ififi" + i ;
     }
+
+
 }
