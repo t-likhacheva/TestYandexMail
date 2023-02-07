@@ -21,12 +21,21 @@ public class DraftsMethods extends WebDriverSettings {
     }
 
     public static DraftsMethods draftsMethodsraftsMethods = new DraftsMethods(driver);
-
+    /**
+     * Xpath для чекбокса относительно ВЕБЭЛЕМЕНТА строки из списка писем
+     */
+    private static final String xpathCheckBox = ".//*[@data-nb='checkbox']";
     /**
      * Массив  всех писем (веб элемены)
      */
     @FindBy(xpath = "//div[@class='ns-view-container-desc mail-MessagesList js-messages-list']/div")
     public static List<WebElement> webElementDraftList;
+    /**
+     * Кнопка удалить письма
+     */
+    @FindBy(xpath = "//span[contains(text(),'Удалить')]/..")
+    public static WebElement button_delete;
+
 
     /**
      * Получение массива всех писем (данные)
@@ -91,7 +100,7 @@ public class DraftsMethods extends WebDriverSettings {
             }
             i++;
         }
-        log.info("Письма нет в списке черновиков");
+        log.error("Письма нет в списке черновиков");
         ;
     }
 
@@ -101,16 +110,32 @@ public class DraftsMethods extends WebDriverSettings {
         for (WebElement webElement : webElementDraftList) {
             Message mes = readMessageParamsFromWebElement(webElement);
             if (listMesToSelect.contains(mes)) {
-                log.info("Нашли письмо в списке по номером " + i + " и ставим чекбокс");
+                log.info("Нашли письмо в списке черновиков по номером " + i);
                 selectCheckBox(webElement);
             }
             i++;
         }
-        log.info("Письма нет в списке черновиков");
+        log.error("Письма нет в списке черновиков, поставить чекбокс не удалось");
         ;
     }
 
+
     private static void selectCheckBox(WebElement webElement) {
+        if (!webElement.findElement(By.xpath(xpathCheckBox)).isSelected()) {
+            webElement.findElement(By.xpath(xpathCheckBox)).click();
+            log.info("Проставили чекбокс");
+        }
+    }
+
+    public static void selectAllCheckBox() {
+        for (WebElement webElement : webElementDraftList) {
+            selectCheckBox(webElement);
+        }
+    }
+
+    public static void deleteSelected() {
+        base.clickElement(button_delete);
+        log.info("Нажали кнопку Удалить");
     }
 
 }
