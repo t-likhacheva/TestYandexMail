@@ -1,4 +1,4 @@
-package org.example.methods_front.inbox;
+package org.example.methods_front.general;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.help_methods.WebDriverSettings;
@@ -12,14 +12,14 @@ import org.openqa.selenium.support.PageFactory;
  * Методы для работы на главной странице (входящие)
  */
 @Slf4j
-public class InboxMethods extends WebDriverSettings {
+public class GeneralMethods extends WebDriverSettings {
 
 
-    public InboxMethods(WebDriver driver) {
+    public GeneralMethods(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
-    public static InboxMethods inboxMethods = new InboxMethods(driver);
+    public static GeneralMethods generalMethods = new GeneralMethods(driver);
 
     /**
      * Кнопка Написать письмо

@@ -2,7 +2,7 @@ package org.example.methods_front.drafts;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.help_methods.WebDriverSettings;
-import org.example.methods_front.inbox.InboxMethods;
+import org.example.methods_front.general.GeneralMethods;
 import org.example.methods_front.newMessage.OpenedMessageMethods;
 import org.example.models.Message;
 import org.openqa.selenium.By;
@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,9 +90,7 @@ public class DraftsMethods extends WebDriverSettings {
         try {
             recipient = webElement.findElement(By.xpath(xpathRecipientInList)).getText();
         } catch (NoSuchElementException e) {
-            log.info("Темы нет в списке");
         }
-
 //        log.info(recipient);
         //получаем текст письм
         String text = webElement.findElement(By.xpath(xpathTextInList)).getText();
@@ -107,11 +106,11 @@ public class DraftsMethods extends WebDriverSettings {
             if (message.equals(readMessageParamsFromWebElement(webElement))) {
                 base.clickElement(webElement);
                 log.info("Открыли письмо");
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+//                try {
+//                    Thread.sleep(500);
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
                 return;
             }
         }
@@ -130,7 +129,7 @@ public class DraftsMethods extends WebDriverSettings {
             }
             i++;
         }
-        log.error(message.toString() +" нет в списке черновиков");
+        log.error(message.toString() + " нет в списке черновиков");
         return false;
     }
 
@@ -150,33 +149,15 @@ public class DraftsMethods extends WebDriverSettings {
         }
     }
 
-    public static boolean checkInImportant(Message message) {
-        ArrayList<Message> listMes = takeMessList();
-        int i = 0;
-        for (Message mes : listMes) {
-            if (mes.equalsWithoutRecipient(message)) {
-                log.info(message.toString() + " есть в списке Важных, Номер по списку " + i);
-                return true;
-            }
-            i++;
-        }
-        log.error(message.toString() +" нет в списке черновиков");
-        return false;
-    }
-
 
     private static void selectCheckBox(WebElement webElement) {
         if (!webElement.findElement(By.xpath(xpathCheckBox + "//input")).isSelected()) {
             base.clickElement(webElement.findElement(By.xpath(xpathCheckBox)));
         }
-        if (!webElement.findElement(By.xpath(xpathCheckBox + "//input")).isSelected()) {
-            log.error("Проставить чекбокс НЕ удалось");
-        } else log.info("Проставили чекбокс");
-
+        Assert.assertTrue(webElement.findElement(By.xpath(xpathCheckBox + "//input")).isSelected());
     }
 
     public static void clickImportantFlagWhenSelected() {
-//        base.clickElement(button_menu);
         base.clickElement(button_label);
         base.clickElement(button_important);
         log.info("Проставили флаг Важные");
@@ -205,7 +186,7 @@ public class DraftsMethods extends WebDriverSettings {
         for (int i = 0; i < count; i++) {
             Message mes = new Message();
             mesList.add(mes);
-            InboxMethods.openNewMail();
+            GeneralMethods.openNewMail();
             OpenedMessageMethods.fillMessage(mes);
             OpenedMessageMethods.closeMessage();
         }
